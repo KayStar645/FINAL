@@ -66,7 +66,7 @@ def show():
 
 if __name__ == "__main__":
     input_file = "datasets/hotel.jsonl"  # <-- sửa đường dẫn file của bạn ở đây
-    output_file = "datasets/hotel_semantic.graphml"
+    output_file = "datasets_kg/hotel.graphml"
     os.makedirs(os.path.dirname(output_file), exist_ok=True)
     create_semantic_graphml(input_file, output_file)
     print(f"✅ Đã tạo file: {output_file}")
