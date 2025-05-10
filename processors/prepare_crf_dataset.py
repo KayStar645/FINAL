@@ -50,6 +50,19 @@ def crf_dataset(input_path: str):
 def main():
     print("Preparing CRF dataset...")
 
+    input_path = "processed_datasets/hotel.jsonl"
+    X_sentences, y_labels = crf_dataset(input_path)
+
+    output_path = "processed_datasets/crf_dataset.jsonl"
+    with open(output_path, "w", encoding="utf-8") as f_out:
+        for tokens, tags in zip(X_sentences, y_labels):
+            f_out.write(json.dumps({
+                "tokens": tokens,
+                "tags": tags
+            }, ensure_ascii=False) + "\n")
+
+    print(f"Đã ghi {len(X_sentences)} dòng vào {output_path}")
+
 
 if __name__ == '__main__':
     main()
