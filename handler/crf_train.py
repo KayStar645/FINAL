@@ -50,9 +50,9 @@ def grid_search_crf(X_train, y_train):
 def train_crf_manual(X_train, y_train, c1=0.1, c2=0.1, max_iter=100):
     crf = CRF(
         algorithm='lbfgs',              # Thuật toán tối ưu hóa: L-BFGS
-        c1=0.01,                        # Hệ số regularization L1 (giảm overfitting)
-        c2=0.01,                        # Hệ số regularization L2 (giảm overfitting)
-        max_iterations=50,             # Số vòng lặp tối đa
+        c1=c1,                        # Hệ số regularization L1 (giảm overfitting)
+        c2=c2,                        # Hệ số regularization L2 (giảm overfitting)
+        max_iterations=max_iter,             # Số vòng lặp tối đa
         all_possible_transitions=True, # Cho phép các trạng thái chuyển không thấy trong train
         all_possible_states=True,      # Cho phép các trạng thái không xuất hiện trong train
         verbose=True                   # Hiển thị thông tin log từng vòng
@@ -118,16 +118,16 @@ def main():
     print("\nĐang huấn luyện mô hình CRF với tham số thủ công...")
     crf = train_crf_manual(
         X_train, y_train,
-        c1=0.1, c2=0.1, max_iter=100
+        c1=0.1, c2=0.1, max_iter=200
     )
 
     # Đánh giá
     y_pred = crf.predict(X_test)
     print("\nBáo cáo phân loại trên tập test:")
-    print(metrics.flat_classification_report(y_test, y_pred, digits=3))
+    print(metrics.flat_classification_report(y_test, y_pred, digits=3, zero_division=0))
 
     # Lưu báo cáo thành CSV
-    report_dict = metrics.flat_classification_report(y_test, y_pred, digits=3, output_dict=True)
+    report_dict = metrics.flat_classification_report(y_test, y_pred, digits=3, output_dict=True, zero_division=0)
     df_report = pd.DataFrame(report_dict).transpose()
     os.makedirs("results", exist_ok=True)
     df_report.to_csv("results/crf_evaluation_report.csv", encoding="utf-8-sig")

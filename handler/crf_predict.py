@@ -67,7 +67,8 @@ def extract_terms(text: str):
 
 # Ví dụ chạy
 if __name__ == "__main__":
-    review = "phòng rộng rãi, giường êm, nhân viên thân thiện, vị trí thuận lợi"
+    #review = "phòng rộng rãi, giường êm, nhân viên thân thiện, vị trí thuận lợi"
+    review = "phòng tắm nhỏ. giường rất êm"
     result = extract_terms(review)
     print("Các cụm từ phản ánh khía cạnh:")
     for t in result:
