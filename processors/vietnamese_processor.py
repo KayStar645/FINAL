@@ -12,6 +12,7 @@ import json
 import pandas as pd
 import glob
 from pathlib import Path
+import unicodedata
 
 
 # https://ihateregex.io
@@ -460,6 +461,27 @@ class VietnameseTextPreprocessor:
             print('Đang đóng trình phân đoạn từ VnCoreNLP...')
             self.word_segmenter.close()
    
+def adjust_labels(id, original_text, processed_text, original_labels, preprocessor):
+    updated_labels = []
+    
+    # Chuẩn hóa Unicode gốc và đã xử lý để đảm bảo match theo vị trí ký tự đúng
+    original_text = unicodedata.normalize('NFC', original_text)
+    processed_text = unicodedata.normalize('NFC', processed_text)
+
+    for start, end, label in original_labels:
+        original_span = original_text[start:end].strip()
+        normalized_span = preprocessor.process_text(original_span, normalize_tone=True, segment=True)
+        
+        search_span = normalized_span.replace('_', ' ')
+        search_processed_text = processed_text.replace('_', ' ')
+
+        match = re.search(search_span, search_processed_text, re.IGNORECASE)
+        
+        if match:
+            updated_labels.append([match.start(), match.end(), label])
+        else:
+            print(f"{id} - Không tìm thấy: '{search_span}' trong processed text.")
+    return updated_labels
 
 def preprocess_hotel_jsonl(
     input_path: str,
@@ -467,8 +489,6 @@ def preprocess_hotel_jsonl(
     vncorenlp_dir: str = "./VnCoreNLP",
     max_correction_length: int = 512
 ):
-    from vietnamese_processor import VietnameseTextPreprocessor
-
     preprocessor = VietnameseTextPreprocessor(
         vncorenlp_dir=vncorenlp_dir,
         max_correction_length=max_correction_length
@@ -478,20 +498,28 @@ def preprocess_hotel_jsonl(
 
     with open(input_path, "r", encoding="utf-8") as f_in, \
          open(output_path, "w", encoding="utf-8") as f_out:
-        
+
         for line in f_in:
             if not line.strip():
                 continue
 
             original = json.loads(line)
             original_text = original["data"]
-            processed_text = preprocessor.process_text(original_text)
+            processed_text = preprocessor.process_text(original_text, normalize_tone=True, segment=True)
 
-            f_out.write(json.dumps(processed_text, ensure_ascii=False) + "\n")
+            updated_labels = adjust_labels(original.get("id"), original_text, processed_text, original.get("label", []), preprocessor)
+
+            result = {
+                "id": original.get("id"),
+                "data": processed_text,
+                "label": updated_labels,
+                "labels": original.get("labels", "")
+            }
+
+            f_out.write(json.dumps(result, ensure_ascii=False) + "\n")
 
     preprocessor.close_vncorenlp()
-    print(f"Đã xử lý xong. File kết quả: {output_path}")
-
+    print(f"Đã xử lý và lưu tại: {output_path}")
 
 def main():
     print("VietNamese Processor...")
