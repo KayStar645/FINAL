@@ -45,7 +45,7 @@ def sent2features(sent):
     return [word2features(sent, i) for i in range(len(sent))]
 
 def main():
-    input_path = "datasets/hotel.jsonl"
+    input_path = "processed_datasets/hotel.jsonl"
     X_sentences, y_labels = crf_dataset(input_path)
 
     # Chia train/test
