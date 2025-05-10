@@ -1,9 +1,11 @@
 # FINAL
 
 ## Giai đoạn 1: Tiền xử lý văn bản (VietnameseTextPreprocessor)
-Sử dụng code sẵn có trong vietnamese_processor.py 
+vietnamese_processor.py 
 
 ## Giai đoạn 2: Huấn luyện mô hình CRF với PhoBERT
+prepare_crf_dataset
+
 Gán nhãn dữ liệu (BIO)
 
 Tokenize với PhoBERT

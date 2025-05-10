@@ -494,11 +494,12 @@ def preprocess_hotel_jsonl(
 
 
 def main():
+    print("VietNamese Processor...")
+
     preprocess_hotel_jsonl(
     input_path="datasets/hotel.jsonl",
     output_path="processed_datasets/hotel_processed.jsonl"
 )
-
 
 if __name__ == '__main__':
     main()
