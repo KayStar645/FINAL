@@ -1,0 +1,286 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d1" for="edge" attr.name="relation" attr.type="string"/>
+<key id="d0" for="node" attr.name="type" attr.type="string"/>
+<graph edgedefault="directed"><node id="FACILITIES">
+  <data key="d0">domain</data>
+</node>
+<node id="DESIGN&amp;FEATURES">
+  <data key="d0">aspect</data>
+</node>
+<node id="negative">
+  <data key="d0">sentiment</data>
+</node>
+<node id="LOCATION">
+  <data key="d0">domain</data>
+</node>
+<node id="GENERAL">
+  <data key="d0">aspect</data>
+</node>
+<node id="positive">
+  <data key="d0">sentiment</data>
+</node>
+<node id="SERVICE">
+  <data key="d0">domain</data>
+</node>
+<node id="QUALITY">
+  <data key="d0">aspect</data>
+</node>
+<node id="ROOMS">
+  <data key="d0">domain</data>
+</node>
+<node id="COMFORT">
+  <data key="d0">aspect</data>
+</node>
+<node id="HOTEL">
+  <data key="d0">domain</data>
+</node>
+<node id="ROOM_AMENITIES">
+  <data key="d0">domain</data>
+</node>
+<node id="CLEANLINESS">
+  <data key="d0">aspect</data>
+</node>
+<node id="FOOD&amp;DRINKS">
+  <data key="d0">domain</data>
+</node>
+<node id="STYLE&amp;OPTIONS">
+  <data key="d0">aspect</data>
+</node>
+<node id="neutral">
+  <data key="d0">sentiment</data>
+</node>
+<node id="PRICES">
+  <data key="d0">aspect</data>
+</node>
+<node id="MISCELLANEOUS">
+  <data key="d0">aspect</data>
+</node>
+<edge source="DESIGN&amp;FEATURES" target="FACILITIES">
+  <data key="d1">part-of</data>
+</edge>
+<edge source="DESIGN&amp;FEATURES" target="negative">
+  <data key="d1">expresses</data>
+</edge>
+<edge source="DESIGN&amp;FEATURES" target="ROOMS">
+  <data key="d1">part-of</data>
+</edge>
+<edge source="DESIGN&amp;FEATURES" target="positive">
+  <data key="d1">expresses</data>
+</edge>
+<edge source="DESIGN&amp;FEATURES" target="HOTEL">
+  <data key="d1">part-of</data>
+</edge>
+<edge source="DESIGN&amp;FEATURES" target="ROOM_AMENITIES">
+  <data key="d1">part-of</data>
+</edge>
+<edge source="DESIGN&amp;FEATURES" target="neutral">
+  <data key="d1">expresses</data>
+</edge>
+<edge source="DESIGN&amp;FEATURES" target="FOOD&amp;DRINKS">
+  <data key="d1">part-of</data>
+</edge>
+<edge source="DESIGN&amp;FEATURES" target="LOCATION">
+  <data key="d1">part-of</data>
+</edge>
+<edge source="DESIGN&amp;FEATURES" target="SERVICE">
+  <data key="d1">part-of</data>
+</edge>
+<edge source="GENERAL" target="LOCATION">
+  <data key="d1">part-of</data>
+</edge>
+<edge source="GENERAL" target="positive">
+  <data key="d1">expresses</data>
+</edge>
+<edge source="GENERAL" target="SERVICE">
+  <data key="d1">part-of</data>
+</edge>
+<edge source="GENERAL" target="HOTEL">
+  <data key="d1">part-of</data>
+</edge>
+<edge source="GENERAL" target="FOOD&amp;DRINKS">
+  <data key="d1">part-of</data>
+</edge>
+<edge source="GENERAL" target="ROOM_AMENITIES">
+  <data key="d1">part-of</data>
+</edge>
+<edge source="GENERAL" target="negative">
+  <data key="d1">expresses</data>
+</edge>
+<edge source="GENERAL" target="neutral">
+  <data key="d1">expresses</data>
+</edge>
+<edge source="GENERAL" target="FACILITIES">
+  <data key="d1">part-of</data>
+</edge>
+<edge source="GENERAL" target="ROOMS">
+  <data key="d1">part-of</data>
+</edge>
+<edge source="QUALITY" target="SERVICE">
+  <data key="d1">part-of</data>
+</edge>
+<edge source="QUALITY" target="positive">
+  <data key="d1">expresses</data>
+</edge>
+<edge source="QUALITY" target="FACILITIES">
+  <data key="d1">part-of</data>
+</edge>
+<edge source="QUALITY" target="negative">
+  <data key="d1">expresses</data>
+</edge>
+<edge source="QUALITY" target="ROOM_AMENITIES">
+  <data key="d1">part-of</data>
+</edge>
+<edge source="QUALITY" target="FOOD&amp;DRINKS">
+  <data key="d1">part-of</data>
+</edge>
+<edge source="QUALITY" target="ROOMS">
+  <data key="d1">part-of</data>
+</edge>
+<edge source="QUALITY" target="HOTEL">
+  <data key="d1">part-of</data>
+</edge>
+<edge source="QUALITY" target="LOCATION">
+  <data key="d1">part-of</data>
+</edge>
+<edge source="QUALITY" target="neutral">
+  <data key="d1">expresses</data>
+</edge>
+<edge source="COMFORT" target="FACILITIES">
+  <data key="d1">part-of</data>
+</edge>
+<edge source="COMFORT" target="positive">
+  <data key="d1">expresses</data>
+</edge>
+<edge source="COMFORT" target="negative">
+  <data key="d1">expresses</data>
+</edge>
+<edge source="COMFORT" target="ROOM_AMENITIES">
+  <data key="d1">part-of</data>
+</edge>
+<edge source="COMFORT" target="LOCATION">
+  <data key="d1">part-of</data>
+</edge>
+<edge source="COMFORT" target="ROOMS">
+  <data key="d1">part-of</data>
+</edge>
+<edge source="COMFORT" target="HOTEL">
+  <data key="d1">part-of</data>
+</edge>
+<edge source="COMFORT" target="SERVICE">
+  <data key="d1">part-of</data>
+</edge>
+<edge source="COMFORT" target="neutral">
+  <data key="d1">expresses</data>
+</edge>
+<edge source="COMFORT" target="FOOD&amp;DRINKS">
+  <data key="d1">part-of</data>
+</edge>
+<edge source="CLEANLINESS" target="ROOM_AMENITIES">
+  <data key="d1">part-of</data>
+</edge>
+<edge source="CLEANLINESS" target="positive">
+  <data key="d1">expresses</data>
+</edge>
+<edge source="CLEANLINESS" target="ROOMS">
+  <data key="d1">part-of</data>
+</edge>
+<edge source="CLEANLINESS" target="SERVICE">
+  <data key="d1">part-of</data>
+</edge>
+<edge source="CLEANLINESS" target="negative">
+  <data key="d1">expresses</data>
+</edge>
+<edge source="CLEANLINESS" target="HOTEL">
+  <data key="d1">part-of</data>
+</edge>
+<edge source="CLEANLINESS" target="FACILITIES">
+  <data key="d1">part-of</data>
+</edge>
+<edge source="CLEANLINESS" target="LOCATION">
+  <data key="d1">part-of</data>
+</edge>
+<edge source="CLEANLINESS" target="FOOD&amp;DRINKS">
+  <data key="d1">part-of</data>
+</edge>
+<edge source="STYLE&amp;OPTIONS" target="FOOD&amp;DRINKS">
+  <data key="d1">part-of</data>
+</edge>
+<edge source="STYLE&amp;OPTIONS" target="negative">
+  <data key="d1">expresses</data>
+</edge>
+<edge source="STYLE&amp;OPTIONS" target="ROOM_AMENITIES">
+  <data key="d1">part-of</data>
+</edge>
+<edge source="STYLE&amp;OPTIONS" target="positive">
+  <data key="d1">expresses</data>
+</edge>
+<edge source="STYLE&amp;OPTIONS" target="FACILITIES">
+  <data key="d1">part-of</data>
+</edge>
+<edge source="STYLE&amp;OPTIONS" target="SERVICE">
+  <data key="d1">part-of</data>
+</edge>
+<edge source="STYLE&amp;OPTIONS" target="ROOMS">
+  <data key="d1">part-of</data>
+</edge>
+<edge source="STYLE&amp;OPTIONS" target="HOTEL">
+  <data key="d1">part-of</data>
+</edge>
+<edge source="STYLE&amp;OPTIONS" target="LOCATION">
+  <data key="d1">part-of</data>
+</edge>
+<edge source="STYLE&amp;OPTIONS" target="neutral">
+  <data key="d1">expresses</data>
+</edge>
+<edge source="PRICES" target="ROOMS">
+  <data key="d1">part-of</data>
+</edge>
+<edge source="PRICES" target="positive">
+  <data key="d1">expresses</data>
+</edge>
+<edge source="PRICES" target="HOTEL">
+  <data key="d1">part-of</data>
+</edge>
+<edge source="PRICES" target="SERVICE">
+  <data key="d1">part-of</data>
+</edge>
+<edge source="PRICES" target="FOOD&amp;DRINKS">
+  <data key="d1">part-of</data>
+</edge>
+<edge source="PRICES" target="negative">
+  <data key="d1">expresses</data>
+</edge>
+<edge source="PRICES" target="FACILITIES">
+  <data key="d1">part-of</data>
+</edge>
+<edge source="PRICES" target="LOCATION">
+  <data key="d1">part-of</data>
+</edge>
+<edge source="PRICES" target="neutral">
+  <data key="d1">expresses</data>
+</edge>
+<edge source="PRICES" target="ROOM_AMENITIES">
+  <data key="d1">part-of</data>
+</edge>
+<edge source="MISCELLANEOUS" target="LOCATION">
+  <data key="d1">part-of</data>
+</edge>
+<edge source="MISCELLANEOUS" target="positive">
+  <data key="d1">expresses</data>
+</edge>
+<edge source="MISCELLANEOUS" target="ROOMS">
+  <data key="d1">part-of</data>
+</edge>
+<edge source="MISCELLANEOUS" target="HOTEL">
+  <data key="d1">part-of</data>
+</edge>
+<edge source="MISCELLANEOUS" target="negative">
+  <data key="d1">expresses</data>
+</edge>
+<edge source="MISCELLANEOUS" target="SERVICE">
+  <data key="d1">part-of</data>
+</edge>
+<edge source="MISCELLANEOUS" target="FACILITIES">
+  <data key="d1">part-of</data>
+</edge>
+</graph></graphml>
