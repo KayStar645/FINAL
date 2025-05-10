@@ -459,70 +459,46 @@ class VietnameseTextPreprocessor:
         if self.word_segmenter: 
             print('Đang đóng trình phân đoạn từ VnCoreNLP...')
             self.word_segmenter.close()
-    
-def process_jsonl_files(preprocessor, input_dir='datasets', output_dir='processed_datasets'):
-    os.makedirs(output_dir, exist_ok=True)
-    jsonl_files = glob.glob(f'{input_dir}/**/*.jsonl', recursive=True)
+   
 
-    for jsonl_file in jsonl_files:
-        print(f"\n Đang xử lý file: {jsonl_file}")
-        with open(jsonl_file, 'r', encoding='utf-8') as f:
-            data = [json.loads(line.strip()) for line in f if line.strip()]
+def preprocess_hotel_jsonl(
+    input_path: str,
+    output_path: str,
+    vncorenlp_dir: str = "./VnCoreNLP",
+    max_correction_length: int = 512
+):
+    from vietnamese_processor import VietnameseTextPreprocessor
 
-        texts = [item['text'] for item in data]
-        processed_texts = preprocessor.process_batch(texts, correct_errors=True)
+    preprocessor = VietnameseTextPreprocessor(
+        vncorenlp_dir=vncorenlp_dir,
+        max_correction_length=max_correction_length
+    )
 
-        new_data = []
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
 
-        for original, processed in zip(data, processed_texts):
-            label_updates = []
-            for start, end, label_type in original['labels']:
-                original_span = original['text'][start:end].strip()
-                pattern = re.escape(original_span)
-                match = re.search(pattern, processed, re.IGNORECASE)
+    with open(input_path, "r", encoding="utf-8") as f_in, \
+         open(output_path, "w", encoding="utf-8") as f_out:
+        
+        for line in f_in:
+            if not line.strip():
+                continue
 
-                if match:
-                    new_start, new_end = match.start(), match.end()
-                    label_updates.append([new_start, new_end, label_type])
-                else:
-                    print(f"Không tìm thấy đoạn '{original_span}' sau xử lý trong: {processed[:80]}...")
-                    # Không thêm vào label_updates nếu không tìm thấy
+            original = json.loads(line)
+            original_text = original["data"]
+            processed_text = preprocessor.process_text(original_text)
 
-            new_data.append({
-                'text': original['text'],
-                'processed_text': processed,
-                'labels': label_updates
-            })
+            f_out.write(json.dumps(processed_text, ensure_ascii=False) + "\n")
 
-        rel_path = Path(jsonl_file).relative_to(input_dir)
-        output_file = os.path.join(output_dir, str(rel_path))
-        os.makedirs(os.path.dirname(output_file), exist_ok=True)
+    preprocessor.close_vncorenlp()
+    print(f"Đã xử lý xong. File kết quả: {output_path}")
 
-        with open(output_file, 'w', encoding='utf-8') as f:
-            for item in new_data:
-                f.write(json.dumps(item, ensure_ascii=False) + '\n')
 
-        print(f"Đã lưu kết quả vào: {output_file}")
-
+def main():
+    preprocess_hotel_jsonl(
+    input_path="datasets/hotel.jsonl",
+    output_path="processed_datasets/hotel_processed.jsonl"
+)
 
 
 if __name__ == '__main__':
-    # Khởi tạo bộ tiền xử lý
-    extra_teencodes = { 
-        'khách sạn': ['ks'], 'nhà hàng': ['nhahang'], 'nhân viên': ['nv'],
-        'cửa hàng': ['store', 'sop', 'shopE', 'shop'], 
-        'sản phẩm': ['sp', 'product'], 'hàng': ['hàg'],
-        'giao hàng': ['ship', 'delivery', 'síp'], 'đặt hàng': ['order'], 
-        'chuẩn chính hãng': ['authentic', 'aut', 'auth'], 'hạn sử dụng': ['date', 'hsd'],
-        'điện thoại': ['dt'],  'facebook': ['fb', 'face'],  
-        'nhắn tin': ['nt', 'ib'], 'trả lời': ['tl', 'trl', 'rep'], 
-        'feedback': ['fback', 'fedback'], 'sử dụng': ['sd'], 'xài': ['sài'], 
-    }
-    
-    preprocessor = VietnameseTextPreprocessor(vncorenlp_dir='./VnCoreNLP', extra_teencodes=extra_teencodes, max_correction_length=512)
-    
-    # Xử lý các file
-    process_jsonl_files(preprocessor, input_dir='datasets', output_dir='processed_datasets')
-    
-    # Đóng VnCoreNLP
-    preprocessor.close_vncorenlp()
+    main()
